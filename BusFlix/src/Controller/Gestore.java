@@ -4,10 +4,12 @@
  */
 package Controller;
 
+
 /**
  *
  * @author carvellip
  */
-public class NewClass {
+public class Gestore {
     
+   
 }

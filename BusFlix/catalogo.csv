@@ -1,0 +1,101 @@
+codice,nome,durata_minuti,episodi,protagonista,categoria,data_uscita
+F001,Inception,148,0,Leonardo DiCaprio,Fantascienza,2010-07-16
+F002,Breaking Bad,47,62,Bryan Cranston,Drammatico,2008-01-20
+F003,The Dark Knight,152,0,Christian Bale,Azione,2008-07-18
+F004,Stranger Things,50,34,Millie Bobby Brown,Fantascienza,2016-07-15
+F005,Il Padrino,175,0,Al Pacino,Crime,1972-03-24
+F006,Game of Thrones,57,73,Emilia Clarke,Fantasy,2011-04-17
+F007,Titanic,195,0,Kate Winslet,Romantico,1997-12-19
+F008,The Office,22,201,Steve Carell,Commedia,2005-03-24
+F009,Interstellar,169,0,Matthew McConaughey,Fantascienza,2014-11-07
+F010,Friends,22,236,Jennifer Aniston,Commedia,1994-09-22
+F011,Avatar,162,0,Sam Worthington,Fantascienza,2009-12-18
+F012,The Matrix,136,0,Keanu Reeves,Azione,1999-03-31
+F013,The Crown,58,40,Claire Foy,Storico,2016-11-04
+F014,The Witcher,60,24,Henry Cavill,Fantasy,2019-12-20
+F015,Pulp Fiction,154,0,John Travolta,Crime,1994-10-14
+F016,Forrest Gump,142,0,Tom Hanks,Drammatico,1994-07-06
+F017,The Mandalorian,40,24,Pedro Pascal,Fantascienza,2019-11-12
+F018,Lost,44,121,Matthew Fox,Avventura,2004-09-22
+F019,Gladiator,155,0,Russell Crowe,Azione,2000-05-05
+F020,The Simpsons,22,750,Dan Castellaneta,Animazione,1989-12-17
+F021,Joker,122,0,Joaquin Phoenix,Drammatico,2019-10-04
+F022,The Boys,60,32,Karl Urban,Azione,2019-07-26
+F023,Black Mirror,60,27,Bryce Dallas Howard,Fantascienza,2011-12-04
+F024,Shutter Island,138,0,Leonardo DiCaprio,Thriller,2010-02-19
+F025,House of Cards,50,73,Kevin Spacey,Drammatico,2013-02-01
+F026,The Shawshank Redemption,142,0,Tim Robbins,Drammatico,1994-09-23
+F027,Peaky Blinders,55,36,Cillian Murphy,Crime,2013-09-12
+F028,The Avengers,143,0,Robert Downey Jr.,Azione,2012-05-04
+F029,How I Met Your Mother,22,208,Josh Radnor,Commedia,2005-09-19
+F030,The Walking Dead,45,177,Andrew Lincoln,Horror,2010-10-31
+F031,Django Unchained,165,0,Jamie Foxx,Western,2012-12-25
+F032,Sherlock,88,13,Benedict Cumberbatch,Giallo,2010-07-25
+F033,Parasite,132,0,Song Kang-ho,Thriller,2019-05-30
+F034,Narcos,50,30,Wagner Moura,Crime,2015-08-28
+F035,Fight Club,139,0,Brad Pitt,Drammatico,1999-10-15
+F036,The Big Bang Theory,22,279,Jim Parsons,Commedia,2007-09-24
+F037,The Lord of the Rings,201,0,Elijah Wood,Fantasy,2001-12-19
+F038,Dark,53,26,Louis Hofmann,Fantascienza,2017-12-01
+F039,Se7en,127,0,Brad Pitt,Thriller,1995-09-22
+F040,Better Call Saul,46,63,Bob Odenkirk,Crime,2015-02-08
+F041,Whiplash,107,0,Miles Teller,Drammatico,2014-10-10
+F042,Vikings,45,89,Travis Fimmel,Storico,2013-03-03
+F043,The Social Network,120,0,Jesse Eisenberg,Drammatico,2010-10-01
+F044,Money Heist,50,41,Úrsula Corberó,Crime,2017-05-02
+F045,Top Gun Maverick,131,0,Tom Cruise,Azione,2022-05-27
+F046,Euphoria,55,18,Zendaya,Drammatico,2019-06-16
+F047,The Silence of the Lambs,118,0,Jodie Foster,Thriller,1991-02-14
+F048,Modern Family,22,250,Ed ONeill,Commedia,2009-09-23
+F049,Blade Runner 2049,164,0,Ryan Gosling,Fantascienza,2017-10-06
+F050,Prison Break,44,90,Wentworth Miller,Azione,2005-08-29
+F051,The Green Mile,189,0,Tom Hanks,Drammatico,1999-12-10
+F052,Suits,42,134,Gabriel Macht,Drammatico,2011-06-23
+F053,Deadpool,108,0,Ryan Reynolds,Azione,2016-02-12
+F054,The Sopranos,55,86,James Gandolfini,Crime,1999-01-10
+F055,Coco,105,0,Anthony Gonzalez,Animazione,2017-11-22
+F056,Loki,50,12,Tom Hiddleston,Fantascienza,2021-06-09
+F057,The Prestige,130,0,Hugh Jackman,Thriller,2006-10-20
+F058,Wednesday,45,16,Jenna Ortega,Fantasy,2022-11-23
+F059,Mad Max Fury Road,120,0,Tom Hardy,Azione,2015-05-15
+F060,Lucifer,45,93,Tom Ellis,Fantasy,2016-01-25
+F061,The Lion King,88,0,Matthew Broderick,Animazione,1994-06-24
+F062,Ozark,60,44,Jason Bateman,Crime,2017-07-21
+F063,Doctor Strange,115,0,Benedict Cumberbatch,Fantascienza,2016-11-04
+F064,Brooklyn Nine-Nine,22,153,Andy Samberg,Commedia,2013-09-17
+F065,The Revenant,156,0,Leonardo DiCaprio,Avventura,2015-12-25
+F066,True Detective,60,31,Matthew McConaughey,Giallo,2014-01-12
+F067,Finding Nemo,100,0,Albert Brooks,Animazione,2003-05-30
+F068,House M.D.,44,177,Hugh Laurie,Drammatico,2004-11-16
+F069,Iron Man,126,0,Robert Downey Jr.,Azione,2008-05-02
+F070,Sex Education,50,32,Asa Butterfield,Commedia,2019-01-11
+F071,The Departed,151,0,Leonardo DiCaprio,Crime,2006-10-06
+F072,Succession,60,39,Brian Cox,Drammatico,2018-06-03
+F073,Spider-Man No Way Home,148,0,Tom Holland,Azione,2021-12-17
+F074,The Bear,35,28,Jeremy Allen White,Commedia,2022-06-23
+F075,Up,96,0,Ed Asner,Animazione,2009-05-29
+F076,Hannibal,43,39,Mads Mikkelsen,Horror,2013-04-04
+F077,The Irishman,209,0,Robert De Niro,Crime,2019-11-27
+F078,Fargo,53,51,Billy Bob Thornton,Crime,2014-04-15
+F079,Inside Out,95,0,Amy Poehler,Animazione,2015-06-19
+F080,Westworld,57,36,Evan Rachel Wood,Fantascienza,2016-10-02
+F081,Avengers Endgame,181,0,Robert Downey Jr.,Azione,2019-04-26
+F082,The Umbrella Academy,50,30,Elliot Page,Fantascienza,2019-02-15
+F083,A Beautiful Mind,135,0,Russell Crowe,Biografico,2001-12-21
+F084,Dexter,53,96,Michael C. Hall,Crime,2006-10-01
+F085,Black Panther,134,0,Chadwick Boseman,Azione,2018-02-16
+F086,Community,22,110,Joel McHale,Commedia,2009-09-17
+F087,La La Land,128,0,Ryan Gosling,Musical,2016-12-09
+F088,Mindhunter,55,19,Jonathan Groff,Thriller,2017-10-13
+F089,Guardians of the Galaxy,121,0,Chris Pratt,Fantascienza,2014-08-01
+F090,The Handmaids Tale,50,56,Elisabeth Moss,Drammatico,2017-04-26
+F091,The Truman Show,103,0,Jim Carrey,Commedia,1998-06-05
+F092,Arrow,42,170,Stephen Amell,Azione,2012-10-10
+F093,Soul,100,0,Jamie Foxx,Animazione,2020-12-25
+F094,Supernatural,42,327,Jared Padalecki,Fantasy,2005-09-13
+F095,Alien,117,0,Sigourney Weaver,Horror,1979-05-25
+F096,The Flash,42,184,Grant Gustin,Fantascienza,2014-10-07
+F097,Rocky,120,0,Sylvester Stallone,Drammatico,1976-11-21
+F098,Rick and Morty,22,71,Justin Roiland,Animazione,2013-12-02
+F099,The Godfather Part II,202,0,Al Pacino,Crime,1974-12-20
+F100,Bridgerton,60,24,Phoebe Dynevor,Romantico,2020-12-25
