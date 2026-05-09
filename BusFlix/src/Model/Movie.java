@@ -8,7 +8,7 @@ package Model;
  *
  * @author marcianof
  */
-public class Film {
+public class Movie {
     String codice;
     String nome;
     Double durata;
@@ -17,7 +17,7 @@ public class Film {
     String categoria;
     String dataUscita;
 
-    public Film(String codice, String nome, Double durata, int episodi, String protagonista, String categoria, String dataUscita) {
+    public Movie(String codice, String nome, Double durata, int episodi, String protagonista, String categoria, String dataUscita) {
         this.codice = codice;
         this.nome = nome;
         this.durata = durata;
@@ -31,6 +31,35 @@ public class Film {
     public String toString() {
         return "Film{" + "codice=" + codice + ", nome=" + nome + ", durata=" + durata + ", episodi=" + episodi + ", protagonista=" + protagonista + ", categoria=" + categoria + ", dataUscita=" + dataUscita + '}';
     }
+
+    public String getCodice() {
+        return codice;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public Double getDurata() {
+        return durata;
+    }
+
+    public int getEpisodi() {
+        return episodi;
+    }
+
+    public String getProtagonista() {
+        return protagonista;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public String getDataUscita() {
+        return dataUscita;
+    }
+    
     
     
 }

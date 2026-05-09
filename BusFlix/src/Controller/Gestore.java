@@ -4,7 +4,10 @@
  */
 package Controller;
 
-import Model.Film;
+import Model.Movie;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -13,10 +16,44 @@ import java.util.ArrayList;
  * @author carvellip
  */
 public class Gestore {
-    ArrayList <Film> gestionefilm = new ArrayList();
+    ArrayList <Movie> gestionefilm = new ArrayList();
     
-    public Film cercaPerCodice(String codice){
-        for(Film f : gestionefilm){
+    public ArrayList<Movie> LeggiCSV() throws IOException {
+        String filename = "catalogo.csv";
+ 
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+
+            String line;
+
+            br.readLine(); // salta intestazione
+
+            while ((line = br.readLine()) != null) {
+                
+                System.out.println(line);
+                String[] info = line.split(",");
+
+                // controllo numero campi
+                if (info.length >= 7) {
+
+                    Movie m = new Movie(
+                            info[0], // codice
+                            info[1], // nome
+                            Double.parseDouble(info[2]), // durata_minuti
+                            Integer.parseInt(info[3]), // episodi
+                            info[4], // protagonista
+                            info[5], // categoria
+                            info[6] // data_uscita
+                    );
+                    gestionefilm.add(m);
+                }
+            }
+        }
+
+        return gestionefilm;
+    }
+            
+    public Movie cercaPerCodice(String codice){
+        for(Movie f : gestionefilm){
             if(f.getCodice().equals(codice)){
                 return f;
             }
@@ -24,9 +61,9 @@ public class Gestore {
         return null;
     }
     
-    public ArrayList<Film> cercaPerCategoria(String categoria){
-        ArrayList<Film> gestcategoria = new ArrayList();
-        for(Film f : gestcategoria){
+    public ArrayList<Movie> cercaPerCategoria(String categoria){
+        ArrayList<Movie> gestcategoria = new ArrayList();
+        for(Movie f : gestcategoria){
             if(f.getCategoria().equals(categoria)){
                 gestcategoria.add(f);
             }
@@ -34,9 +71,9 @@ public class Gestore {
         return gestcategoria;
     }
     
-    public ArrayList<Film> cercaPerProtagonista(String protagonista){
-        ArrayList<Film> gestprotagonista = new ArrayList();
-        for(Film f : gestprotagonista){
+    public ArrayList<Movie> cercaPerProtagonista(String protagonista){
+        ArrayList<Movie> gestprotagonista = new ArrayList();
+        for(Movie f : gestprotagonista){
             if(f.getProtagonista().equals(protagonista)){
                 gestprotagonista.add(f);
             }
@@ -44,4 +81,5 @@ public class Gestore {
         return gestprotagonista;
     }
    
+    
 }

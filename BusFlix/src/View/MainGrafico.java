@@ -4,6 +4,9 @@
  */
 package View;
 
+import Controller.Gestore;
+import java.io.IOException;
+
 /**
  *
  * @author marcianof
@@ -13,8 +16,12 @@ public class MainGrafico {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) throws IOException {
+        Gestore g = new Gestore();
+        System.out.println(g.LeggiCSV());
+        System.out.println("CERCA PER CATEGORIA");
+        System.out.println( g.cercaPerCategoria("Crime"));
+        
     }
     
 }
