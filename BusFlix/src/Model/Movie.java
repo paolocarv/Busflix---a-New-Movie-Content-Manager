@@ -29,7 +29,7 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "Film{" + "codice=" + codice + ", nome=" + nome + ", durata=" + durata + ", episodi=" + episodi + ", protagonista=" + protagonista + ", categoria=" + categoria + ", dataUscita=" + dataUscita + '}';
+        return "Movie{" + "codice=" + codice + ", nome=" + nome + ", durata=" + durata + ", episodi=" + episodi + ", protagonista=" + protagonista + ", categoria=" + categoria + ", dataUscita=" + dataUscita + '}';
     }
 
     public String getCodice() {
