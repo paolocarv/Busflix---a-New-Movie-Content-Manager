@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Gestore {
 
@@ -142,5 +143,41 @@ public class Gestore {
         }
 
         return gestionefilm;
+        
     }
+    
+    public class LettoreCSV {
+
+    public List<String> leggiCodiciFilm(String percorsoFile, String nomeUtente) {
+        List<String> codiciFilm = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(percorsoFile))) {
+
+            String riga;
+
+            while ((riga = br.readLine()) != null) {
+
+                // separa i campi del CSV
+                String[] campi = riga.split(",");
+
+                // controllo sicurezza
+                if (campi.length >= 2) {
+
+                    String utente = campi[0].trim();
+                    String codiceFilm = campi[1].trim();
+
+                    // confronto nome utente
+                    if (utente.equals(nomeUtente)) {
+                        codiciFilm.add(codiceFilm);
+                    }
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return codiciFilm;
+    }
+    
 }
