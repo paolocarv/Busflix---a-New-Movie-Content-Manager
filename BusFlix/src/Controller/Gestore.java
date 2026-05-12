@@ -55,40 +55,6 @@ public class Gestore {
 
         }
     }
-    
-    public void salvaCSV() {
-
-    String filename = "catalogo.csv";
-
-    try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
-
-        // intestazione
-        bw.write("codice,nome,durata,episodi,protagonista,categoria,data");
-        bw.newLine();
-
-        // scrittura film
-        for (Movie m : gestionefilm) {
-
-            bw.write(
-                    m.getCodice() + "," +
-                    m.getNome() + "," +
-                    m.getDurata() + "," +
-                    m.getEpisodi() + "," +
-                    m.getProtagonista() + "," +
-                    m.getCategoria() + "," +
-                    m.getDataUscita()
-            );
-
-            bw.newLine();
-        }
-
-        System.out.println("CSV aggiornato correttamente!");
-
-    } catch (IOException e) {
-
-        System.out.println("Errore salvataggio CSV");
-    }
-}
 
     // CERCA PER CODICE
     public Movie cercaPerCodice(String codice) {
@@ -123,28 +89,8 @@ public class Gestore {
         return gestionefilm;
     }
     
-    public void aggiungiFilm(Movie nuovoFilm) {
+   
 
-        gestionefilm.add(nuovoFilm);
-        salvaCSV();
-        System.out.println("Film aggiunto!");
-    }
-    
-    public ArrayList<Movie> eliminaPerCodice(String codice) {
-
-        for (int i = 0; i < gestionefilm.size(); i++) {
-
-            if (gestionefilm.get(i).getCodice().equalsIgnoreCase(codice)) {
-
-                gestionefilm.remove(i);
-                salvaCSV();
-                break;
-            }
-        }
-
-        return gestionefilm;
-        
-    }
     
     public class LettoreCSV {
 
@@ -180,4 +126,5 @@ public class Gestore {
         return codiciFilm;
     }
     
+    }
 }

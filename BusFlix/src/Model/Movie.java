@@ -9,27 +9,30 @@ package Model;
  * @author marcianof
  */
 public class Movie {
-    String codice;
-    String nome;
-    Double durata;
-    int episodi;
-    String protagonista;
-    String categoria;
-    String dataUscita;
 
-    public Movie(String codice, String nome, Double durata, int episodi, String protagonista, String categoria, String dataUscita) {
+    private String codice;
+    private String nome;
+    private double durata;
+    private int episodi;
+    private String protagonista;
+    private String categoria;
+    private String data;
+
+    public Movie(String codice,
+            String nome,
+            double durata,
+            int episodi,
+            String protagonista,
+            String categoria,
+            String data) {
+
         this.codice = codice;
         this.nome = nome;
         this.durata = durata;
         this.episodi = episodi;
         this.protagonista = protagonista;
         this.categoria = categoria;
-        this.dataUscita = dataUscita;
-    }
-
-    @Override
-    public String toString() {
-        return "Movie{" + "codice=" + codice + ", nome=" + nome + ", durata=" + durata + ", episodi=" + episodi + ", protagonista=" + protagonista + ", categoria=" + categoria + ", dataUscita=" + dataUscita + '}';
+        this.data = data;
     }
 
     public String getCodice() {
@@ -40,7 +43,7 @@ public class Movie {
         return nome;
     }
 
-    public Double getDurata() {
+    public double getDurata() {
         return durata;
     }
 
@@ -56,11 +59,16 @@ public class Movie {
         return categoria;
     }
 
-    public String getDataUscita() {
-        return dataUscita;
+    public String getData() {
+        return data;
     }
-    
-    
-    
-}
 
+    @Override
+    public String toString() {
+
+        return codice + " - "
+                + nome + " - "
+                + categoria + " - "
+                + protagonista;
+    }
+}
