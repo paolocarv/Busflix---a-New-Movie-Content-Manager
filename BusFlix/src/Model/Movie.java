@@ -63,6 +63,34 @@ public class Movie {
         return data;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setDurata(double durata) {
+        this.durata = durata;
+    }
+
+    public void setEpisodi(int episodi) {
+        this.episodi = episodi;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+    
+    
+
+    public void setProtagonista(String protagonista) {
+        this.protagonista = protagonista;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+    
+    
+
     @Override
     public String toString() {
 
