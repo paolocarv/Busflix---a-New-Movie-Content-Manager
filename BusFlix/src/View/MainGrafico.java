@@ -1,121 +1,175 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package View;
 
-/**
- *
- * @author matteo
- */
 import Controller.BusFlixController;
 import Model.Movie;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
 public class MainGrafico {
 
-    private static BusFlixController controller = new BusFlixController();
+    private static BusFlixController controller
+            = new BusFlixController();
 
     public static void main(String[] args) {
 
-        JFrame frame = new JFrame("BusFlix");
-        frame.setSize(700, 450);
+        JFrame frame = new JFrame("BUSFLIX");
+
+        frame.setSize(1400, 850);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new FlowLayout());
+        frame.setLayout(null);
+
+        Color bg = new Color(18, 18, 18);
+        Color panel = new Color(30, 30, 30);
+        Color red = new Color(229, 9, 20);
+
+        frame.getContentPane().setBackground(bg);
+
+        // ================= HEADER =================
+        JPanel header = new JPanel();
+        header.setBounds(0, 0, 1400, 80);
+        header.setBackground(Color.BLACK);
+        header.setLayout(null);
+
+        JLabel titolo = new JLabel("BUSFLIX");
+        titolo.setForeground(red);
+        titolo.setFont(new Font("Arial", Font.BOLD, 40));
+        titolo.setBounds(560, 15, 400, 50);
+
+        header.add(titolo);
+        frame.add(header);
+
+        // ================= MENU =================
         JMenuBar menuBar = new JMenuBar();
 
-// ================= FILE =================
-JMenu fileMenu = new JMenu("File");
+        JMenu fileMenu = new JMenu("File");
+        JMenuItem apriItem = new JMenuItem("Apri");
+        JMenuItem salvaItem = new JMenuItem("Salva");
+        JMenuItem salvaConNomeItem = new JMenuItem("Salva con Nome");
+        JMenuItem esciItem = new JMenuItem("Esci");
 
-JMenuItem apriItem = new JMenuItem("Apri");
-JMenuItem salvaItem = new JMenuItem("Salva");
-JMenuItem salvaConNomeItem =
-        new JMenuItem("Salva con Nome");
-JMenuItem esciItem = new JMenuItem("Esci");
+        fileMenu.add(apriItem);
+        fileMenu.add(salvaItem);
+        fileMenu.add(salvaConNomeItem);
+        fileMenu.addSeparator();
+        fileMenu.add(esciItem);
 
-fileMenu.add(apriItem);
-fileMenu.add(salvaItem);
-fileMenu.add(salvaConNomeItem);
-fileMenu.addSeparator();
-fileMenu.add(esciItem);
+        JMenu modificaMenu = new JMenu("Modifica");
+        JMenuItem inserisciItem = new JMenuItem("Inserisci");
+        JMenuItem visualizzaItem = new JMenuItem("Visualizza Lista");
+        JMenuItem eliminaItem = new JMenuItem("Elimina Film");
 
-// ================= MODIFICA =================
-JMenu modificaMenu = new JMenu("Modifica");
+        modificaMenu.add(inserisciItem);
+        modificaMenu.add(visualizzaItem);
+        modificaMenu.add(eliminaItem);
 
-JMenuItem inserisciItem =
-        new JMenuItem("Inserisci");
+        JMenu infoMenu = new JMenu("Info");
+        JMenuItem aboutItem = new JMenuItem("About");
+        JMenuItem creditsItem = new JMenuItem("Credits");
 
-JMenuItem visualizzaItem =
-        new JMenuItem("Visualizza Lista");
+        infoMenu.add(aboutItem);
+        infoMenu.add(creditsItem);
 
-JMenuItem eliminaItem =
-        new JMenuItem("Elimina Film");
+        menuBar.add(fileMenu);
+        menuBar.add(modificaMenu);
+        menuBar.add(infoMenu);
 
-modificaMenu.add(inserisciItem);
-modificaMenu.add(visualizzaItem);
-modificaMenu.add(eliminaItem);
+        frame.setJMenuBar(menuBar);
 
-// ================= INFO =================
-JMenu infoMenu = new JMenu("Info");
+        // ================= SIDEBAR =================
+        JPanel sidebar = new JPanel();
+        sidebar.setBounds(0, 80, 250, 770);
+        sidebar.setBackground(panel);
+        sidebar.setLayout(null);
 
-JMenuItem aboutItem =
-        new JMenuItem("About");
+        frame.add(sidebar);
 
-JMenuItem creditsItem =
-        new JMenuItem("Credits");
+        JButton catalogoBtn = creaBottone("Catalogo", 25);
+        JButton mieiFilmBtn = creaBottone("Miei Film", 85);
+        JButton aggiungiBtn = creaBottone("Aggiungi", 145);
+        JButton cercaNomeBtn = creaBottone("Cerca Nome", 205);
+        JButton cercaCatBtn = creaBottone("Cerca Categoria", 265);
+        JButton cercaProtBtn = creaBottone("Cerca Attore", 325);
+        JButton cercaDurBtn = creaBottone("Cerca Durata", 385);
 
-infoMenu.add(aboutItem);
-infoMenu.add(creditsItem);
+        sidebar.add(catalogoBtn);
+        sidebar.add(mieiFilmBtn);
+        sidebar.add(aggiungiBtn);
+        sidebar.add(cercaNomeBtn);
+        sidebar.add(cercaCatBtn);
+        sidebar.add(cercaProtBtn);
+        sidebar.add(cercaDurBtn);
 
-// ================= AGGIUNTA MENU =================
-menuBar.add(fileMenu);
-menuBar.add(modificaMenu);
-menuBar.add(infoMenu);
+        // ================= TABELLA =================
+        String[] colonne = {
+                "Codice",
+                "Nome",
+                "Categoria",
+                "Protagonista",
+                "Durata"
+        };
 
-frame.setJMenuBar(menuBar);
+        DefaultTableModel model = new DefaultTableModel(colonne, 0);
+        JTable table = new JTable(model);
+
+        table.setRowHeight(35);
+        table.setFont(new Font("Arial", Font.PLAIN, 15));
+
+        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 16));
+        table.getTableHeader().setBackground(red);
+        table.getTableHeader().setForeground(Color.WHITE);
+
+        table.setBackground(new Color(25, 25, 25));
+        table.setForeground(Color.WHITE);
+        table.setGridColor(Color.DARK_GRAY);
+
+        table.setSelectionBackground(red);
+        table.setSelectionForeground(Color.WHITE);
+
+        JScrollPane scroll = new JScrollPane(table);
+        scroll.setBounds(280, 110, 1080, 570);
+
+        frame.add(scroll);
 
         // ================= LOGIN =================
-        JTextField userField = new JTextField(10);
-        JPasswordField passField = new JPasswordField(10);
-        JButton loginBtn = new JButton("Login");
+        JLabel userLabel = new JLabel("Username");
+        userLabel.setForeground(Color.WHITE);
+        userLabel.setBounds(300, 720, 100, 30);
 
-        frame.add(new JLabel("Username"));
+        JTextField userField = new JTextField();
+        userField.setBounds(390, 720, 150, 30);
+
+        JLabel passLabel = new JLabel("Password");
+        passLabel.setForeground(Color.WHITE);
+        passLabel.setBounds(560, 720, 100, 30);
+
+        JPasswordField passField = new JPasswordField();
+        passField.setBounds(650, 720, 150, 30);
+
+        JButton loginBtn = new JButton("LOGIN");
+        loginBtn.setBounds(830, 720, 120, 30);
+        loginBtn.setBackground(red);
+        loginBtn.setForeground(Color.WHITE);
+
+        JLabel codiceLabel = new JLabel("Codice Film");
+        codiceLabel.setForeground(Color.WHITE);
+        codiceLabel.setBounds(980, 720, 100, 30);
+
+        JTextField codiceField = new JTextField();
+        codiceField.setBounds(1080, 720, 100, 30);
+
+        frame.add(userLabel);
         frame.add(userField);
-
-        frame.add(new JLabel("Password"));
+        frame.add(passLabel);
         frame.add(passField);
-
         frame.add(loginBtn);
-
-        // ================= OUTPUT =================
-        JTextArea output = new JTextArea(18, 50);
-        output.setEditable(false);
-        frame.add(new JScrollPane(output));
-
-        // ================= BOTTONI =================
-        JButton catalogoBtn = new JButton("Catalogo generale");
-        JButton mieiFilmBtn = new JButton("Miei film");
-        JButton aggiungiBtn = new JButton("Aggiungi film");
-        JButton cercaNomeBtn = new JButton("Cerca Nome");
-        JButton cercaCatBtn = new JButton("Cerca Categoria");
-        JButton cercaProtBtn = new JButton("Cerca Protagonista");
-        JButton cercaDurBtn = new JButton("Cerca Durata");
-
-        JTextField codiceField = new JTextField(6);
-
-        frame.add(catalogoBtn);
-        frame.add(mieiFilmBtn);
-
-        frame.add(new JLabel("Codice film:"));
+        frame.add(codiceLabel);
         frame.add(codiceField);
-        frame.add(aggiungiBtn);
-        frame.add(cercaNomeBtn);
-        frame.add(cercaCatBtn);
-        frame.add(cercaProtBtn);
-        frame.add(cercaDurBtn);
+
+        // ================= LOAD INIZIALE =================
+        controller.apriFile();
 
         // ================= LOGIN =================
         loginBtn.addActionListener(e -> {
@@ -126,258 +180,204 @@ frame.setJMenuBar(menuBar);
             boolean ok = controller.login(user, pass);
 
             if (ok) {
-                output.setText("Login riuscito!\nBenvenuto " + user);
+                JOptionPane.showMessageDialog(frame,
+                        "LOGIN RIUSCITO\nBenvenuto " + user);
             } else {
-                output.setText("Login fallito");
+                JOptionPane.showMessageDialog(frame,
+                        "LOGIN FALLITO");
             }
         });
 
-        // ================= CATALOGO GENERALE =================
+        // ================= CATALOGO =================
         catalogoBtn.addActionListener(e -> {
-
-            List<Movie> lista = controller.getCatalogo();
-
-            StringBuilder sb = new StringBuilder();
-
-            for (Movie f : lista) {
-                sb.append(f).append("\n");
-            }
-
-            output.setText(sb.toString());
+            aggiornaTabella(model, controller.getCatalogo());
         });
 
-        // ================= CATALOGO UTENTE =================
+        // ================= MIEI FILM =================
         mieiFilmBtn.addActionListener(e -> {
-
-            List<Movie> lista = controller.getCatalogoUtente();
-
-            StringBuilder sb = new StringBuilder();
-
-            if (lista.isEmpty()) {
-                sb.append("Nessun film nel tuo catalogo");
-            } else {
-                for (Movie f : lista) {
-                    sb.append(f).append("\n");
-                }
-            }
-
-            output.setText(sb.toString());
+            aggiornaTabella(model, controller.getCatalogoUtente());
         });
 
-        // ================= AGGIUNGI FILM =================
+        // ================= AGGIUNGI =================
         aggiungiBtn.addActionListener(e -> {
 
-            String codice = codiceField.getText();
+            String codice = codiceField.getText().trim();
 
             boolean ok = controller.aggiungiFilm(codice);
 
             if (ok) {
-                output.setText("Film aggiunto ai preferiti!");
+                JOptionPane.showMessageDialog(frame,
+                        "Film aggiunto!");
+
+                // 🔥 aggiorna subito lista corrente
+                aggiornaTabella(model, controller.getCatalogoUtente());
+
             } else {
-                output.setText("Errore o film già presente");
+                JOptionPane.showMessageDialog(frame,
+                        "Film già presente");
             }
         });
-          cercaNomeBtn.addActionListener (e  
-        -> {
 
-    String input = JOptionPane.showInputDialog("Nome:");
+        // ================= RICERCHE =================
+        cercaNomeBtn.addActionListener(e -> {
+            String input = JOptionPane.showInputDialog("Nome:");
+            aggiornaTabella(model,
+                    controller.cercaPerNome(controller.getCatalogo(), input));
+        });
 
-        List<Movie> lista
-                = controller.cercaPerNome(controller.getCatalogo(), input);
+        cercaCatBtn.addActionListener(e -> {
+            String input = JOptionPane.showInputDialog("Categoria:");
+            aggiornaTabella(model,
+                    controller.cercaPerCategoria(controller.getCatalogo(), input));
+        });
 
-        output.setText("");
+        cercaProtBtn.addActionListener(e -> {
+            String input = JOptionPane.showInputDialog("Protagonista:");
+            aggiornaTabella(model,
+                    controller.cercaPerProtagonista(controller.getCatalogo(), input));
+        });
 
-        for (Movie f : lista) {
-            output.append(f + "\n");
-        }
-    }
+        cercaDurBtn.addActionListener(e -> {
+            String input = JOptionPane.showInputDialog("Durata max:");
+            int max = Integer.parseInt(input);
+            aggiornaTabella(model,
+                    controller.cercaPerDurata(controller.getCatalogo(), max));
+        });
 
-    );
+        // ================= FILE =================
+        apriItem.addActionListener(e -> {
+            controller.apriFile();
+            aggiornaTabella(model, controller.getCatalogo());
+            JOptionPane.showMessageDialog(frame, "FILE APERTO");
+        });
 
+        salvaItem.addActionListener(e -> {
+            controller.salvaFile();
+            JOptionPane.showMessageDialog(frame, "FILE SALVATO");
+        });
 
-    cercaCatBtn.addActionListener (e  
-        -> {
+        salvaConNomeItem.addActionListener(e -> {
+            controller.salvaConNome();
+            JOptionPane.showMessageDialog(frame, "FILE SALVATO");
+        });
 
-    String input = JOptionPane.showInputDialog("Categoria:");
+        // ================= VISUALIZZA =================
+        visualizzaItem.addActionListener(e -> {
+            aggiornaTabella(model, controller.getCatalogo());
+        });
 
-        List<Movie> lista
-                = controller.cercaPerCategoria(controller.getCatalogo(), input);
+        // ================= INSERISCI =================
+        inserisciItem.addActionListener(e -> {
 
-        output.setText("");
+            JDialog dialog = new JDialog(frame, "Inserisci Film", true);
+            dialog.setSize(350, 350);
+            dialog.setLayout(null);
 
-        for (Movie f : lista) {
-            output.append(f + "\n");
-        }
-    }
+            JTextField codice = new JTextField();
+            codice.setBounds(120, 30, 150, 30);
 
-    );
+            JTextField nome = new JTextField();
+            nome.setBounds(120, 80, 150, 30);
 
+            JTextField categoria = new JTextField();
+            categoria.setBounds(120, 130, 150, 30);
 
-    cercaProtBtn.addActionListener (e  
-        -> {
+            JTextField protagonista = new JTextField();
+            protagonista.setBounds(120, 180, 150, 30);
 
-    String input = JOptionPane.showInputDialog("Protagonista:");
+            JButton salva = new JButton("Salva");
+            salva.setBounds(120, 240, 100, 35);
 
-        List<Movie> lista
-                = controller.cercaPerProtagonista(controller.getCatalogo(), input);
+            dialog.add(new JLabel("Codice")).setBounds(30, 30, 80, 30);
+            dialog.add(codice);
 
-        output.setText("");
+            dialog.add(new JLabel("Nome")).setBounds(30, 80, 80, 30);
+            dialog.add(nome);
 
-        for (Movie f : lista) {
-            output.append(f + "\n");
-        }
-    }
+            dialog.add(new JLabel("Categoria")).setBounds(30, 130, 80, 30);
+            dialog.add(categoria);
 
-    );
+            dialog.add(new JLabel("Protagonista")).setBounds(30, 180, 100, 30);
+            dialog.add(protagonista);
 
+            dialog.add(salva);
 
-    cercaDurBtn.addActionListener (e  
-        -> {
+            salva.addActionListener(ev -> {
+                JOptionPane.showMessageDialog(frame,
+                        "Nuovo film inserito: " + nome.getText());
+                dialog.dispose();
+            });
 
-    String input = JOptionPane.showInputDialog("Durata max:");
+            dialog.setVisible(true);
+        });
 
-        int max = Integer.parseInt(input);
+        // ================= ELIMINA =================
+        eliminaItem.addActionListener(e -> {
 
-        List<Movie> lista
-                = controller.cercaPerDurata(controller.getCatalogo(), max);
+            String codice = JOptionPane.showInputDialog("Codice film:");
 
-        output.setText("");
+            if (codice == null || codice.isEmpty()) return;
 
-        for (Movie f : lista) {
-            output.append(f + "\n");
-        }
-    }
-            
-            
-
-);
-    
-    esciItem.addActionListener(e -> {
-
-    System.exit(0);
-});
-    
-    aboutItem.addActionListener(e -> {
-
-    JOptionPane.showMessageDialog(
-            frame,
-            "BusFlix v1.0\nGestione Film MVC"
-    );
-});
-    
-    creditsItem.addActionListener(e -> {
-
-    JOptionPane.showMessageDialog(
-            frame,
-            "Creato da Matteo"
-    );
-});
-    
-    apriItem.addActionListener(e -> {
-
-    controller.apriFile();
-
-    output.setText("File aperto!");
-});
-    
-    salvaItem.addActionListener(e -> {
-
-    controller.salvaFile();
-
-    output.setText("File salvato!");
-});
-    
-    salvaConNomeItem.addActionListener(e -> {
-
-    controller.salvaConNome();
-
-    output.setText("File salvato!");
-});
-    
-    visualizzaItem.addActionListener(e -> {
-
-    List<Movie> lista = controller.getCatalogo();
-
-    output.setText("");
-
-    for(Movie f : lista) {
-
-        output.append(f + "\n");
-    }
-});
-    
-    inserisciItem.addActionListener(e -> {
-
-    JDialog dialog =
-            new JDialog(frame,
-                    "Inserisci Film",
-                    true);
-
-    dialog.setSize(300,300);
-    dialog.setLayout(new GridLayout(6,2));
-
-    JTextField codice = new JTextField();
-    JTextField nome = new JTextField();
-    JTextField categoria = new JTextField();
-    JTextField protagonista = new JTextField();
-
-    JButton salva = new JButton("Salva");
-
-    dialog.add(new JLabel("Codice"));
-    dialog.add(codice);
-
-    dialog.add(new JLabel("Nome"));
-    dialog.add(nome);
-
-    dialog.add(new JLabel("Categoria"));
-    dialog.add(categoria);
-
-    dialog.add(new JLabel("Protagonista"));
-    dialog.add(protagonista);
-
-    dialog.add(salva);
-
-    salva.addActionListener(ev -> {
-
-        output.append(
-                "\nNuovo film inserito: "
-                + nome.getText());
-
-        dialog.dispose();
-    });
-
-    dialog.setVisible(true);
-});
-    
-    eliminaItem.addActionListener(e -> {
-
-    String codice =
-            JOptionPane.showInputDialog(
-                    "Codice film da eliminare:");
-
-    int risposta =
-            JOptionPane.showConfirmDialog(
+            int risposta = JOptionPane.showConfirmDialog(
                     frame,
-                    "Vuoi eliminare il film?",
+                    "Eliminare il film?",
                     "Conferma",
                     JOptionPane.YES_NO_OPTION
             );
 
-    if(risposta == JOptionPane.YES_OPTION) {
+            if (risposta == JOptionPane.YES_OPTION) {
 
-        boolean ok =
-                controller.eliminaFilm(codice);
+                boolean ok = controller.eliminaFilm(codice);
 
-        if(ok) {
+                if (ok) {
+                    aggiornaTabella(model, controller.getCatalogoUtente());
 
-            output.setText(
-                    "Film eliminato");
-        }
-    }
-});
+                    JOptionPane.showMessageDialog(frame,
+                            "FILM ELIMINATO");
+                }
+            }
+        });
 
+        // ================= ABOUT =================
+        aboutItem.addActionListener(e ->
+                JOptionPane.showMessageDialog(frame, "BusFlix v1.0"));
 
+        creditsItem.addActionListener(e ->
+                JOptionPane.showMessageDialog(frame, "Creato da Matteo"));
+
+        esciItem.addActionListener(e -> System.exit(0));
 
         frame.setVisible(true);
+    }
+
+    // ================= UPDATE =================
+    private static void aggiornaTabella(DefaultTableModel model, List<Movie> lista) {
+
+        model.setRowCount(0);
+
+        for (Movie f : lista) {
+            model.addRow(new Object[]{
+                    f.getCodice(),
+                    f.getNome(),
+                    f.getCategoria(),
+                    f.getProtagonista(),
+                    f.getDurata() + " min"
+            });
+        }
+    }
+
+    // ================= BOTTONI =================
+    private static JButton creaBottone(String testo, int y) {
+
+        JButton btn = new JButton(testo);
+
+        btn.setBounds(20, y, 200, 45);
+        btn.setBackground(new Color(229, 9, 20));
+        btn.setForeground(Color.WHITE);
+        btn.setFocusPainted(false);
+        btn.setBorderPainted(false);
+        btn.setFont(new Font("Arial", Font.BOLD, 15));
+
+        return btn;
     }
 }

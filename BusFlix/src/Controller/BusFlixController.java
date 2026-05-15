@@ -4,9 +4,9 @@ import Model.CSVManager;
 import Model.Movie;
 
 import javax.swing.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.File;
 
 public class BusFlixController {
 
@@ -14,8 +14,10 @@ public class BusFlixController {
     private String utenteLoggato;
     private File fileCorrente;
 
-    // 🔥 LISTA INTERNA (FONDAMENTALE)
     private List<Movie> catalogo = new ArrayList<>();
+
+    // 🔥 CACHE PREFERITI (FIX FONDAMENTALE)
+    private List<String> preferitiCache = new ArrayList<>();
 
     public BusFlixController() {
         csvManager = new CSVManager();
@@ -28,6 +30,7 @@ public class BusFlixController {
 
         if (accesso) {
             utenteLoggato = username;
+            refreshPreferiti(); // 🔥 carica subito preferiti
         }
 
         return accesso;
@@ -38,7 +41,6 @@ public class BusFlixController {
     }
 
     // ================= FILE =================
-
     public void apriFile() {
 
         JFileChooser chooser = new JFileChooser();
@@ -48,9 +50,7 @@ public class BusFlixController {
         if (scelta == JFileChooser.APPROVE_OPTION) {
 
             fileCorrente = chooser.getSelectedFile();
-
-            // 🔥 SALVIAMO LA LISTA
-            catalogo = csvManager.caricaDaFile(fileCorrente);
+            caricaCatalogo();
         }
     }
 
@@ -73,17 +73,24 @@ public class BusFlixController {
         if (scelta == JFileChooser.APPROVE_OPTION) {
 
             fileCorrente = chooser.getSelectedFile();
-
             csvManager.salvaSuFile(fileCorrente, catalogo);
         }
     }
 
-    // ================= CATALOGO =================
+    // ================= LOAD =================
+    public void caricaCatalogo() {
 
+        if (fileCorrente != null) {
+            catalogo = csvManager.caricaDaFile(fileCorrente);
+        }
+    }
+
+    // ================= CATALOGO =================
     public List<Movie> getCatalogo() {
         return catalogo;
     }
 
+    // ================= UTENTE FILM =================
     public List<Movie> getCatalogoUtente() {
 
         List<Movie> risultato = new ArrayList<>();
@@ -92,12 +99,9 @@ public class BusFlixController {
             return risultato;
         }
 
-        List<String> codici =
-                csvManager.leggiCodiciUtente(utenteLoggato);
-
+        // 🔥 SEMPRE FRESH DA CACHE (non dal file ogni volta)
         for (Movie f : catalogo) {
-
-            if (codici.contains(f.getCodice())) {
+            if (preferitiCache.contains(f.getCodice())) {
                 risultato.add(f);
             }
         }
@@ -106,28 +110,25 @@ public class BusFlixController {
     }
 
     // ================= AGGIUNGI =================
-
     public boolean aggiungiFilm(String codiceFilm) {
 
         if (utenteLoggato == null) {
             return false;
         }
 
-        List<Movie> giaPresenti = getCatalogoUtente();
-
-        for (Movie f : giaPresenti) {
-            if (f.getCodice().equals(codiceFilm)) {
-                return false;
-            }
+        if (preferitiCache.contains(codiceFilm)) {
+            return false;
         }
 
         csvManager.salvaPreferito(utenteLoggato, codiceFilm);
+
+        // 🔥 FIX: aggiorna subito memoria
+        preferitiCache.add(codiceFilm);
 
         return true;
     }
 
     // ================= ELIMINA =================
-
     public boolean eliminaFilm(String codiceFilm) {
 
         if (utenteLoggato == null) {
@@ -143,10 +144,10 @@ public class BusFlixController {
 
         if (risposta == JOptionPane.YES_OPTION) {
 
-            csvManager.rimuoviPreferito(
-                    utenteLoggato,
-                    codiceFilm
-            );
+            csvManager.rimuoviPreferito(utenteLoggato, codiceFilm);
+
+            // 🔥 FIX: aggiorna cache subito
+            preferitiCache.remove(codiceFilm);
 
             return true;
         }
@@ -154,31 +155,21 @@ public class BusFlixController {
         return false;
     }
 
-    // ================= MODIFICA =================
+    // ================= REFRESH =================
+    private void refreshPreferiti() {
 
-    public void modificaFilm(Movie film,
-                             String nuovoNome,
-                             String nuovaCategoria,
-                             String nuovoProtagonista,
-                             double nuovaDurata) {
-
-        film.setNome(nuovoNome);
-        film.setCategoria(nuovaCategoria);
-        film.setProtagonista(nuovoProtagonista);
-        film.setDurata(nuovaDurata);
+        if (utenteLoggato != null) {
+            preferitiCache = csvManager.leggiCodiciUtente(utenteLoggato);
+        }
     }
 
     // ================= RICERCHE =================
-
     public List<Movie> cercaPerNome(List<Movie> catalogo, String nome) {
 
         List<Movie> risultato = new ArrayList<>();
 
         for (Movie f : catalogo) {
-
-            if (f.getNome().toLowerCase()
-                    .contains(nome.toLowerCase())) {
-
+            if (f.getNome().toLowerCase().contains(nome.toLowerCase())) {
                 risultato.add(f);
             }
         }
@@ -191,9 +182,7 @@ public class BusFlixController {
         List<Movie> risultato = new ArrayList<>();
 
         for (Movie f : catalogo) {
-
             if (f.getCategoria().equalsIgnoreCase(cat)) {
-
                 risultato.add(f);
             }
         }
@@ -206,10 +195,7 @@ public class BusFlixController {
         List<Movie> risultato = new ArrayList<>();
 
         for (Movie f : catalogo) {
-
-            if (f.getProtagonista().toLowerCase()
-                    .contains(p.toLowerCase())) {
-
+            if (f.getProtagonista().toLowerCase().contains(p.toLowerCase())) {
                 risultato.add(f);
             }
         }
@@ -222,9 +208,7 @@ public class BusFlixController {
         List<Movie> risultato = new ArrayList<>();
 
         for (Movie f : catalogo) {
-
             if (f.getDurata() <= max) {
-
                 risultato.add(f);
             }
         }
@@ -237,11 +221,9 @@ public class BusFlixController {
         List<Movie> risultato = new ArrayList<>();
 
         for (Movie f : catalogo) {
-
             if (f.getNome().toLowerCase().contains(testo.toLowerCase())
                     || f.getProtagonista().toLowerCase().contains(testo.toLowerCase())
                     || f.getCategoria().toLowerCase().contains(testo.toLowerCase())) {
-
                 risultato.add(f);
             }
         }
@@ -250,8 +232,8 @@ public class BusFlixController {
     }
 
     // ================= LOGOUT =================
-
     public void logout() {
         utenteLoggato = null;
+        preferitiCache.clear();
     }
 }

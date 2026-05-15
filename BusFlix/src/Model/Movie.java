@@ -88,15 +88,12 @@ public class Movie {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-    
-    
 
     @Override
     public String toString() {
-
-        return codice + " - "
-                + nome + " - "
-                + categoria + " - "
-                + protagonista;
+        return "Movie{" + "codice=" + codice + ", nome=" + nome + ", durata=" + durata + ", episodi=" + episodi + ", protagonista=" + protagonista + ", categoria=" + categoria + ", data=" + data + '}';
     }
+    
+    
+
 }
