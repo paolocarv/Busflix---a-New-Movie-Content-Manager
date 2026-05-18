@@ -27,7 +27,7 @@ public class MainGrafico {
 
         frame.getContentPane().setBackground(bg);
 
-        // ================= HEADER =================
+        //header
         JPanel header = new JPanel();
         header.setBounds(0, 0, 1400, 80);
         header.setBackground(Color.BLACK);
@@ -41,7 +41,7 @@ public class MainGrafico {
         header.add(titolo);
         frame.add(header);
 
-        // ================= MENU =================
+        //menu
         JMenuBar menuBar = new JMenuBar();
 
         JMenu fileMenu = new JMenu("File");
@@ -78,7 +78,7 @@ public class MainGrafico {
 
         frame.setJMenuBar(menuBar);
 
-        // ================= SIDEBAR =================
+        //sidebar
         JPanel sidebar = new JPanel();
         sidebar.setBounds(0, 80, 250, 770);
         sidebar.setBackground(panel);
@@ -102,7 +102,7 @@ public class MainGrafico {
         sidebar.add(cercaProtBtn);
         sidebar.add(cercaDurBtn);
 
-        // ================= TABELLA =================
+        //tabella
         String[] colonne = {
                 "Codice",
                 "Nome",
@@ -133,7 +133,7 @@ public class MainGrafico {
 
         frame.add(scroll);
 
-        // ================= LOGIN =================
+        //login
         JLabel userLabel = new JLabel("Username");
         userLabel.setForeground(Color.WHITE);
         userLabel.setBounds(300, 720, 100, 30);
@@ -167,11 +167,10 @@ public class MainGrafico {
         frame.add(loginBtn);
         frame.add(codiceLabel);
         frame.add(codiceField);
-
-        // ================= LOAD INIZIALE =================
+        
         controller.apriFile();
 
-        // ================= LOGIN =================
+        //login
         loginBtn.addActionListener(e -> {
 
             String user = userField.getText();
@@ -188,17 +187,17 @@ public class MainGrafico {
             }
         });
 
-        // ================= CATALOGO =================
+        //catalogo
         catalogoBtn.addActionListener(e -> {
             aggiornaTabella(model, controller.getCatalogo());
         });
 
-        // ================= MIEI FILM =================
+        //miei film
         mieiFilmBtn.addActionListener(e -> {
             aggiornaTabella(model, controller.getCatalogoUtente());
         });
 
-        // ================= AGGIUNGI =================
+        //aggiungi
         aggiungiBtn.addActionListener(e -> {
 
             String codice = codiceField.getText().trim();
@@ -218,7 +217,7 @@ public class MainGrafico {
             }
         });
 
-        // ================= RICERCHE =================
+        //ricerche
         cercaNomeBtn.addActionListener(e -> {
             String input = JOptionPane.showInputDialog("Nome:");
             aggiornaTabella(model,
@@ -244,7 +243,7 @@ public class MainGrafico {
                     controller.cercaPerDurata(controller.getCatalogo(), max));
         });
 
-        // ================= FILE =================
+        //file
         apriItem.addActionListener(e -> {
             controller.apriFile();
             aggiornaTabella(model, controller.getCatalogo());
@@ -261,12 +260,12 @@ public class MainGrafico {
             JOptionPane.showMessageDialog(frame, "FILE SALVATO");
         });
 
-        // ================= VISUALIZZA =================
+        //visua
         visualizzaItem.addActionListener(e -> {
             aggiornaTabella(model, controller.getCatalogo());
         });
 
-        // ================= INSERISCI =================
+        //inserimento
         inserisciItem.addActionListener(e -> {
 
             JDialog dialog = new JDialog(frame, "Inserisci Film", true);
@@ -311,7 +310,7 @@ public class MainGrafico {
             dialog.setVisible(true);
         });
 
-        // ================= ELIMINA =================
+        //elimina
         eliminaItem.addActionListener(e -> {
 
             String codice = JOptionPane.showInputDialog("Codice film:");
@@ -338,7 +337,6 @@ public class MainGrafico {
             }
         });
 
-        // ================= ABOUT =================
         aboutItem.addActionListener(e ->
                 JOptionPane.showMessageDialog(frame, "BusFlix v1.0"));
 
@@ -350,7 +348,7 @@ public class MainGrafico {
         frame.setVisible(true);
     }
 
-    // ================= UPDATE =================
+    //aggiorna tab
     private static void aggiornaTabella(DefaultTableModel model, List<Movie> lista) {
 
         model.setRowCount(0);
@@ -366,7 +364,7 @@ public class MainGrafico {
         }
     }
 
-    // ================= BOTTONI =================
+    //bottoni
     private static JButton creaBottone(String testo, int y) {
 
         JButton btn = new JButton(testo);

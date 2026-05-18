@@ -15,22 +15,20 @@ public class BusFlixController {
     private File fileCorrente;
 
     private List<Movie> catalogo = new ArrayList<>();
-
-    // 🔥 CACHE PREFERITI (FIX FONDAMENTALE)
     private List<String> preferitiCache = new ArrayList<>();
 
     public BusFlixController() {
         csvManager = new CSVManager();
     }
 
-    // ================= LOGIN =================
+    //login
     public boolean login(String username, String password) {
 
         boolean accesso = csvManager.controllaLogin(username, password);
 
         if (accesso) {
             utenteLoggato = username;
-            refreshPreferiti(); // 🔥 carica subito preferiti
+            refreshPreferiti(); //carica subito preferiti
         }
 
         return accesso;
@@ -40,7 +38,7 @@ public class BusFlixController {
         return utenteLoggato;
     }
 
-    // ================= FILE =================
+    //apertura file
     public void apriFile() {
 
         JFileChooser chooser = new JFileChooser();
@@ -53,7 +51,8 @@ public class BusFlixController {
             caricaCatalogo();
         }
     }
-
+    
+    //salvataggio file
     public void salvaFile() {
 
         if (fileCorrente == null) {
@@ -77,7 +76,7 @@ public class BusFlixController {
         }
     }
 
-    // ================= LOAD =================
+    //caricamento
     public void caricaCatalogo() {
 
         if (fileCorrente != null) {
@@ -85,12 +84,10 @@ public class BusFlixController {
         }
     }
 
-    // ================= CATALOGO =================
     public List<Movie> getCatalogo() {
         return catalogo;
     }
 
-    // ================= UTENTE FILM =================
     public List<Movie> getCatalogoUtente() {
 
         List<Movie> risultato = new ArrayList<>();
@@ -99,7 +96,6 @@ public class BusFlixController {
             return risultato;
         }
 
-        // 🔥 SEMPRE FRESH DA CACHE (non dal file ogni volta)
         for (Movie f : catalogo) {
             if (preferitiCache.contains(f.getCodice())) {
                 risultato.add(f);
@@ -109,7 +105,7 @@ public class BusFlixController {
         return risultato;
     }
 
-    // ================= AGGIUNGI =================
+    //aggiunta file
     public boolean aggiungiFilm(String codiceFilm) {
 
         if (utenteLoggato == null) {
@@ -122,13 +118,12 @@ public class BusFlixController {
 
         csvManager.salvaPreferito(utenteLoggato, codiceFilm);
 
-        // 🔥 FIX: aggiorna subito memoria
         preferitiCache.add(codiceFilm);
 
         return true;
     }
 
-    // ================= ELIMINA =================
+    //elimina
     public boolean eliminaFilm(String codiceFilm) {
 
         if (utenteLoggato == null) {
@@ -146,7 +141,6 @@ public class BusFlixController {
 
             csvManager.rimuoviPreferito(utenteLoggato, codiceFilm);
 
-            // 🔥 FIX: aggiorna cache subito
             preferitiCache.remove(codiceFilm);
 
             return true;
@@ -155,7 +149,7 @@ public class BusFlixController {
         return false;
     }
 
-    // ================= REFRESH =================
+    //refresh
     private void refreshPreferiti() {
 
         if (utenteLoggato != null) {
@@ -163,7 +157,7 @@ public class BusFlixController {
         }
     }
 
-    // ================= RICERCHE =================
+    //varie ricerche
     public List<Movie> cercaPerNome(List<Movie> catalogo, String nome) {
 
         List<Movie> risultato = new ArrayList<>();
@@ -199,7 +193,6 @@ public class BusFlixController {
                 risultato.add(f);
             }
         }
-
         return risultato;
     }
 
@@ -212,7 +205,6 @@ public class BusFlixController {
                 risultato.add(f);
             }
         }
-
         return risultato;
     }
 
@@ -231,7 +223,7 @@ public class BusFlixController {
         return risultato;
     }
 
-    // ================= LOGOUT =================
+    //logout
     public void logout() {
         utenteLoggato = null;
         preferitiCache.clear();
