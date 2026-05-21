@@ -23,9 +23,7 @@ public class CSVManager {
 
         try {
 
-            BufferedReader br
-                    = new BufferedReader(
-                            new FileReader("utenti.csv"));
+            BufferedReader br = new BufferedReader(new FileReader("utenti.csv"));
 
             String riga;
 
@@ -38,9 +36,7 @@ public class CSVManager {
                 String usernameCSV = dati[2];
                 String passwordCSV = dati[3];
 
-                if (username.equals(usernameCSV)
-                        && password.equals(passwordCSV)) {
-
+                if (username.equals(usernameCSV) && password.equals(passwordCSV)) {
                     br.close();
                     return true;
                 }
@@ -57,16 +53,12 @@ public class CSVManager {
     }
     
 
-    public void salvaSuFile(File file,
-            List<Movie> listaFilm) {
+    public void salvaSuFile(File file, List<Movie> listaFilm) {
 
         try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 
-            BufferedWriter bw
-                    = new BufferedWriter(
-                            new FileWriter(file));
-
-            // intestazione CSV
+            //intestazione CSV
             bw.write("codice,nome,durata,episodi,protagonista,categoria,data");
             bw.newLine();
 
@@ -99,9 +91,7 @@ public class CSVManager {
 
     try {
 
-        BufferedReader br =
-                new BufferedReader(
-                        new FileReader(file));
+        BufferedReader br = new BufferedReader(new FileReader(file));
 
         String riga;
 
@@ -134,16 +124,13 @@ public class CSVManager {
     return listaFilm;
 }
     
-    public void rimuoviPreferito(String username,
-                             String codiceFilm) {
-
+    public void rimuoviPreferito(String username,String codiceFilm) {
+        
     try {
 
         List<String> righe = new ArrayList<>();
 
-        BufferedReader br =
-                new BufferedReader(
-                        new FileReader("referenza.csv"));
+        BufferedReader br = new BufferedReader(new FileReader("referenza.csv"));
 
         String riga;
 
@@ -151,25 +138,18 @@ public class CSVManager {
 
             String[] dati = riga.split(",");
 
-            boolean daEliminare =
-                    dati[0].equals(username)
-                    &&
-                    dati[1].equals(codiceFilm);
+            boolean daEliminare = dati[0].equals(username) && dati[1].equals(codiceFilm);
 
             if (!daEliminare) {
-
                 righe.add(riga);
             }
         }
 
         br.close();
 
-        BufferedWriter bw =
-                new BufferedWriter(
-                        new FileWriter("referenza.csv"));
+        BufferedWriter bw = new BufferedWriter(new FileWriter("referenza.csv"));
 
         for (String s : righe) {
-
             bw.write(s);
             bw.newLine();
         }
@@ -177,32 +157,22 @@ public class CSVManager {
         bw.close();
 
     } catch (Exception e) {
-
         e.printStackTrace();
     }
 }
     
-    public void aggiornaFilm(List<Movie> listaFilm,
-                         Movie filmModificato) {
+    public void aggiornaFilm(List<Movie> listaFilm,Movie filmModificato) {
 
-    for (Movie film : listaFilm) {
+        for (Movie film : listaFilm) {
 
-        if (film.getCodice()
-                .equals(filmModificato.getCodice())) {
+            if (film.getCodice().equals(filmModificato.getCodice())) {
 
-            film.setNome(
-                    filmModificato.getNome());
-
-            film.setCategoria(
-                    filmModificato.getCategoria());
-
-            film.setDurata(
-                    filmModificato.getDurata());
-
-            film.setProtagonista(
-                    filmModificato.getProtagonista());
+                film.setNome(filmModificato.getNome());
+                film.setCategoria(filmModificato.getCategoria());
+                film.setDurata(filmModificato.getDurata());
+                film.setProtagonista(filmModificato.getProtagonista());
+            }
         }
-    }
 }
 
     public List<Movie> leggiFilm() {
@@ -211,9 +181,7 @@ public class CSVManager {
 
         try {
 
-            BufferedReader br
-                    = new BufferedReader(
-                            new FileReader("catalogo.csv"));
+            BufferedReader br = new BufferedReader(new FileReader("catalogo.csv"));
 
             String riga;
 
@@ -247,7 +215,6 @@ public class CSVManager {
             br.close();
 
         } catch (Exception e) {
-
             e.printStackTrace();
         }
 
@@ -259,10 +226,8 @@ public class CSVManager {
         List<String> codici = new ArrayList<>();
 
         try {
-
-            BufferedReader br
-                    = new BufferedReader(new FileReader("referenza.csv"));
-
+            BufferedReader br = new BufferedReader(new FileReader("referenza.csv"));
+            
             String riga;
             br.readLine();
 
@@ -271,7 +236,6 @@ public class CSVManager {
                 String[] d = riga.split(",");
 
                 if (d[0].equals(username)) {
-
                     codici.add(d[1]);
                 }
             }
@@ -288,18 +252,13 @@ public class CSVManager {
     public void salvaPreferito(String username, String codiceFilm) {
 
         try {
-
-            BufferedWriter bw
-                    = new BufferedWriter(
-                            new FileWriter("referenza.csv", true));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("referenza.csv", true));
 
             bw.write(username + "," + codiceFilm);
             bw.newLine();
-
             bw.close();
 
         } catch (Exception e) {
-
             e.printStackTrace();
         }
     }

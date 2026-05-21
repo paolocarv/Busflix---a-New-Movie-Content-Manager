@@ -10,8 +10,7 @@ import java.util.List;
 
 public class MainGrafico {
 
-    private static BusFlixController controller
-            = new BusFlixController();
+    private static BusFlixController controller = new BusFlixController();
 
     public static void main(String[] args) {
 
@@ -179,11 +178,9 @@ public class MainGrafico {
             boolean ok = controller.login(user, pass);
 
             if (ok) {
-                JOptionPane.showMessageDialog(frame,
-                        "LOGIN RIUSCITO\nBenvenuto " + user);
+                JOptionPane.showMessageDialog(frame, "LOGIN RIUSCITO\nBenvenuto " + user);
             } else {
-                JOptionPane.showMessageDialog(frame,
-                        "LOGIN FALLITO");
+                JOptionPane.showMessageDialog(frame, "LOGIN FALLITO");
             }
         });
 
@@ -205,15 +202,13 @@ public class MainGrafico {
             boolean ok = controller.aggiungiFilm(codice);
 
             if (ok) {
-                JOptionPane.showMessageDialog(frame,
-                        "Film aggiunto!");
+                JOptionPane.showMessageDialog(frame, "Film aggiunto!");
 
-                // 🔥 aggiorna subito lista corrente
+                //aggiorna subito lista corrente
                 aggiornaTabella(model, controller.getCatalogoUtente());
 
             } else {
-                JOptionPane.showMessageDialog(frame,
-                        "Film già presente");
+                JOptionPane.showMessageDialog(frame, "Film già presente");
             }
         });
 
@@ -226,21 +221,18 @@ public class MainGrafico {
 
         cercaCatBtn.addActionListener(e -> {
             String input = JOptionPane.showInputDialog("Categoria:");
-            aggiornaTabella(model,
-                    controller.cercaPerCategoria(controller.getCatalogo(), input));
+            aggiornaTabella(model, controller.cercaPerCategoria(controller.getCatalogo(), input));
         });
 
         cercaProtBtn.addActionListener(e -> {
             String input = JOptionPane.showInputDialog("Protagonista:");
-            aggiornaTabella(model,
-                    controller.cercaPerProtagonista(controller.getCatalogo(), input));
+            aggiornaTabella(model, controller.cercaPerProtagonista(controller.getCatalogo(), input));
         });
 
         cercaDurBtn.addActionListener(e -> {
             String input = JOptionPane.showInputDialog("Durata max:");
             int max = Integer.parseInt(input);
-            aggiornaTabella(model,
-                    controller.cercaPerDurata(controller.getCatalogo(), max));
+            aggiornaTabella(model, controller.cercaPerDurata(controller.getCatalogo(), max));
         });
 
         //file
@@ -317,12 +309,7 @@ public class MainGrafico {
 
             if (codice == null || codice.isEmpty()) return;
 
-            int risposta = JOptionPane.showConfirmDialog(
-                    frame,
-                    "Eliminare il film?",
-                    "Conferma",
-                    JOptionPane.YES_NO_OPTION
-            );
+            int risposta = JOptionPane.showConfirmDialog(frame, "Eliminare il film?", "Conferma", JOptionPane.YES_NO_OPTION);
 
             if (risposta == JOptionPane.YES_OPTION) {
 
@@ -331,17 +318,14 @@ public class MainGrafico {
                 if (ok) {
                     aggiornaTabella(model, controller.getCatalogoUtente());
 
-                    JOptionPane.showMessageDialog(frame,
-                            "FILM ELIMINATO");
+                    JOptionPane.showMessageDialog(frame,"FILM ELIMINATO");
                 }
             }
         });
 
-        aboutItem.addActionListener(e ->
-                JOptionPane.showMessageDialog(frame, "BusFlix v1.0"));
+        aboutItem.addActionListener(e -> JOptionPane.showMessageDialog(frame, "BusFlix v1.0"));
 
-        creditsItem.addActionListener(e ->
-                JOptionPane.showMessageDialog(frame, "Creato da Matteo"));
+        creditsItem.addActionListener(e -> JOptionPane.showMessageDialog(frame, "Creato da Matteo"));
 
         esciItem.addActionListener(e -> System.exit(0));
 

@@ -79,8 +79,6 @@ public class Movie {
         this.data = data;
     }
     
-    
-
     public void setProtagonista(String protagonista) {
         this.protagonista = protagonista;
     }
